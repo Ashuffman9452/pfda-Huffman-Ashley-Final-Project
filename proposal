@@ -1,41 +1,44 @@
-# Title
+# Game: "Spellshock"
 
 ## Repository
-<Link to your project's public GitHub respository>
+https://github.com/Ashuffman9452/pfda-Huffman-Ashley-Final-Project
 
 ## Description
-1-2 sentence description of what it will do and how it relevant to media and digital arts.
+"Spellshock" is a roguelike dungeon crawler-esque game inspired by Balatro where you play as 1 out of 3 starting characters, each having small differences in their starts.
+You will have a set of starting spells and 'affinity' in which a set few will be called up at random, and doing specific combinations will have naturally higher or lower damage against monsters, with boss monsters having gimmicks.
+Monsters will slowly get harder and harder with more health and possibly harder/more common gimmicks as it plays on, until you lose. This relates to media and digital arts as games are wonderful forms of expression and creativity.
+
 
 ## Features
-- Feature 1
-	- Short explaination of how it will be executed.
-- Feature 2
-	- Short explaination of how it will be executed.
-- Feature N 
-	- Short explaination of how it will be executed.
+- Random spell/affinity gain through random library and interactions with them for score/damage, and abilities to cycle through spells.
+	- 2 lists, one that contains every spell possible, and one that contains every type of affinity. Pair with a system that randomly selects affinities/spells, and another which has set scores for combinations.
+- Monster vs player turn based attacks each level, with boss at end through classes and custom functions.
+	- System that manages the health of the player and the monster, which also takes in the spell score and uses it as damage, and once your turn ends, the character taking damage.
+-  Visuals through Pygame that display what you are doing and your choices
+	- Import the pygame library and create assets for the game and impliment them through systems that handle when/how each asset is shown and played.
 
 ## Challenges
-- Short sentence of any skill or topic that needs to be learnt or researched.
-- Short sentence of any skill or topic that needs to be learnt or researched.
-- Short sentence of any skill or topic that needs to be learnt or researched.
+- I will need to revisit and dive more into class systems and custom functions, as they will be used widely though this project.
+- I will need to learn more about the Pygame library to see what visuals/visual styles and audio I can impliment for the beginning of my game.
+- Learning how to store information into variables and optimize the experience will also likely need to be researched on, as various interactions will be occuring at a time with variables and player input.
 
 ## Outcomes
 Ideal Outcome:
-- Briefly describe what is the ideal outcome?
+- My ideal outcome would be to create a game with basic visuals conveying each of my features listed before for a fun, short experience and possibly more functions than originally listed, such as multiple rounds or spell types.
 
 Minimal Viable Outcome:
-- Briefly describe the bare essential for a good working outcome?
+- My bare essential outcome would be a text game that still is able to function, portraying 1 character with one round of gameplay which can be able to play from start to finish. This includes the random spell combat systems, monsters, and 1 boss.
 
 ## Milestones
 
 - Week 1
-  1. Goal 1
-  2. Goal 2
+  1. Create a custom function or class that handles how spells and affinities are chosen and given to player.
+  2. Create a system that scores/determines the damage of the spell and affinity combo.
 
 - Week 2
-  1. Goal 1
-  2. Goal 2
+  1. Create a basic enemy or two and a boss variant with a list of randomly chosen gimicks which can be applied.
+  2. Impliment the basic combat and round system between the player and the monsters which can result in a win or a loss.
 
 - Week N (Final)
-  1. Goal 1
-  2. Goal 2
+  1. Add basic visuals with text that align with that the player is doing and their options on affinities.
+  2. Add basic sound effects and music to the game to make a more intriguing experience
