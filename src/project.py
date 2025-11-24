@@ -46,16 +46,38 @@ def inventory():
     hand_counter = 0
     hand = []
     while hand_counter < 7:
-        idx = random.randrange(len(affinity_inventory))
-        hand.append(affinity_inventory[idx])
-        affinity_inventory.pop(idx)
         hand_counter += 1
+        idx = random.randrange(len(affinity_inventory))
+        hand.append(f"{affinity_inventory[idx]}{hand_counter}")
+        affinity_inventory.pop(idx)
     return hand
 
 
 def game():
-        player_hand = inventory()
-        print(player_hand)
+    player_hand = inventory()
+    print(player_hand)
+    selected_hand = []
+
+    selection_process = True
+    while selection_process == True:
+        try:
+            selection = input("select up to 5 affinities by typing their index(1-7) seperated by spaces: ")
+            inputs = selection.split()
+            integer_selection = [int(item) for item in inputs]
+            break
+        except ValueError:
+            print("Invalid input, try again")
+
+    for number in integer_selection:
+        int_number = number - 1
+        selected_affinity = player_hand[int_number]
+        selected_hand.append(selected_affinity)
+    confirmation = input(f"Play {selected_hand}?(Y/N): ")
+    if confirmation == "Y" or "y":
+      return selected_hand  
+    return player_hand
+
+
 
 def main():
     running = True
@@ -64,12 +86,11 @@ def main():
         quit = input("Do you want to quit? Y/N: ")
         if quit == "Y" or "y":
             running = False
-        else:
-           running = True 
+        elif quit == "N" or "n":
+           running = True
     if running == False:
         print("Thank you for playing")
     
-
 
 if __name__ == "__main__":
     main()
