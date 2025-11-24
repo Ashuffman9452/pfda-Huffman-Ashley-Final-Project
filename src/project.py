@@ -60,7 +60,7 @@ def game():
 def main():
     running = True
     while running == True:
-         
+        result = game()
         quit = input("Do you want to quit? Y/N: ")
         if quit == "Y" or "y":
             running = False
