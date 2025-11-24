@@ -4,14 +4,17 @@ import random
 
 def spell_library():
     # key-value library that encompasses the spells, affinities, and score.
-    
+    # key-value library is used because, you might want to add, remove, or change affinities/score through upgrades or powerups.
+
     # key values of 4 affinities- fire, lightning, holy, and mystic with their score
+    # affinity / score
     affinity_list = {"fire": 10,
                      "lightning": 10,
                      "holy": 10,
                      "mystic": 10,
                      "affinity_list": ["fire", "lightning", "holy", "mystic"]}
     # key values of spells- bolt, whip, ball, burst(for frenzy), placeholder, comet
+    # spell / multiplier
     spell_list = {"bolt": 1,
                   "whip": 2,
                   "ball": 3,
