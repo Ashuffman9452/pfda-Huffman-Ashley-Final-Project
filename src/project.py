@@ -53,11 +53,14 @@ def inventory():
     return hand
 
 
+def game():
+        player_hand = inventory()
+        print(player_hand)
+
 def main():
     running = True
     while running == True:
-        player_hand = inventory()
-        print(player_hand)
+         
         quit = input("Do you want to quit? Y/N: ")
         if quit == "Y" or "y":
             running = False
