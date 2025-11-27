@@ -23,7 +23,7 @@ def spell_library():
                   "comet": 5}
 
 
-def score_calculator():
+def score_calculator(Selected_hand):
     # calculates the score through formulas and returns result
     ## scoring will be determined as such:
 
@@ -60,22 +60,25 @@ def game():
 
     selection_process = True
     while selection_process == True:
-        try:
-            selection = input("select up to 5 affinities by typing their index(1-7) seperated by spaces: ")
-            inputs = selection.split()
-            integer_selection = [int(item) for item in inputs]
-            break
-        except ValueError:
-            print("Invalid input, try again")
+        affinity_selection = True
+        while affinity_selection == True:
+            try:
+                selection = input("select up to 5 affinities by typing their index(1-7) seperated by spaces: ")
+                inputs = selection.split()
+                integer_selection = [int(item) for item in inputs]
+                affinity_selection = False
+            except ValueError:
+                print("Invalid input, try again")
 
-    for number in integer_selection:
-        int_number = number - 1
-        selected_affinity = player_hand[int_number]
-        selected_hand.append(selected_affinity)
-    confirmation = input(f"Play {selected_hand}?(Y/N): ")
-    if confirmation == "Y" or "y":
-      return selected_hand  
-    return player_hand
+        for number in integer_selection:
+            int_number = number - 1
+            selected_affinity = player_hand[int_number]
+            selected_hand.append(selected_affinity)
+        confirmation = input(f"Play {selected_hand}?(Y/N): ")
+        if confirmation == "Y" or "y":
+            return selected_hand  
+        else:
+            print("Canceled")
 
 
 
