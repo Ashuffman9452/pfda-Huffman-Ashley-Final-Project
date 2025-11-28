@@ -83,6 +83,7 @@ def game():
                 return score_calculator(selected_hand)
             elif confirmation == "N" or confirmation == "n":
                 print("Canceled")
+                selected_hand = []
                 hand_confirmation = False
             else:
                 print("Please provide a valid input.")
