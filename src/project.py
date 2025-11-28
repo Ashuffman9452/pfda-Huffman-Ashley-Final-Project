@@ -48,7 +48,7 @@ def inventory():
     while hand_counter < 7:
         hand_counter += 1
         idx = random.randrange(len(affinity_inventory))
-        hand.append(f"{affinity_inventory[idx]}{hand_counter}")
+        hand.append(f"{affinity_inventory[idx]}")
         affinity_inventory.pop(idx)
     return hand
 
@@ -61,6 +61,7 @@ def game():
     selection_process = True
     while selection_process == True:
         affinity_selection = True
+        hand_confirmation = True
         while affinity_selection == True:
             try:
                 selection = input("select up to 5 affinities by typing their index(1-7) seperated by spaces: ")
@@ -74,23 +75,34 @@ def game():
             int_number = number - 1
             selected_affinity = player_hand[int_number]
             selected_hand.append(selected_affinity)
-        confirmation = input(f"Play {selected_hand}?(Y/N): ")
-        if confirmation == "Y" or "y":
-            return selected_hand  
-        else:
-            print("Canceled")
-
+        
+        
+        while hand_confirmation == True:
+            confirmation = input(f"Play {selected_hand}?(Y/N): ")
+            if confirmation == "Y" or confirmation == "y":
+                return score_calculator(selected_hand)
+            elif confirmation == "N" or confirmation == "n":
+                print("Canceled")
+                hand_confirmation = False
+            else:
+                print("Please provide a valid input.")
 
 
 def main():
     running = True
     while running == True:
+        quit_confirmation = True
         result = game()
-        quit = input("Do you want to quit? Y/N: ")
-        if quit == "Y" or "y":
-            running = False
-        elif quit == "N" or "n":
-           running = True
+        while quit_confirmation == True:
+            quit = input("Do you want to quit? Y/N: ")
+            if quit == "Y" or quit == "y":
+                running = False
+                quit_confirmation = False
+            elif quit == "N" or quit == "n":
+                print("Restarting.")
+                quit_confirmation = False
+            else:
+                print("Please provide a valid input.")
     if running == False:
         print("Thank you for playing")
     
