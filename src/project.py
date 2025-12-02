@@ -1,5 +1,6 @@
 # import pygame
 import random
+from collections import Counter
 
 
 def spell_library():
@@ -23,7 +24,7 @@ def spell_library():
                   "comet": 5}
 
 
-def score_calculator(Selected_hand):
+def score_calculator(selected_hand):
     # calculates the score through formulas and returns result
     ## scoring will be determined as such:
 
@@ -34,7 +35,9 @@ def score_calculator(Selected_hand):
     ### Placeholder and burst will both be 4x
 
     # formula types with their scores
-
+    print("Calculating score...")
+    affinity, power = Counter(selected_hand).most_common(1)[0]
+    print(f"Your spell will have the {affinity} affinity and {power} multiplier")
     # calculator that takes formulas and the input of the character 
     return
 
