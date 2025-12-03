@@ -16,7 +16,7 @@ def spell_library():
     spell_list = {"bolt": 1,
                   "whip": 2,
                   "ball": 3,
-                  "burst": 3.5,
+                  "burst": 3,
                   "placeholder": 4,
                   "comet": 5}
     returned_library = (affinity_list, spell_list)
