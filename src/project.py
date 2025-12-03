@@ -22,9 +22,17 @@ def spell_library():
                   "burst": 4,
                   "placeholder": 4,
                   "comet": 5}
+    returned_library = (affinity_list, spell_list)
+    return returned_library
 
 
-def score_calculator(selected_hand):
+def score_calculator(selected_hand, returned_library):
+    affinity_list, spell_list = returned_library
+    spell_hierarchy = {"1": "bolt",
+                       "2": "whip", 
+                       "3": "ball", 
+                       "4": "placeholder", 
+                       "5": "comet"}
     # calculates the score through formulas and returns result
     ## scoring will be determined as such:
 
@@ -37,9 +45,17 @@ def score_calculator(selected_hand):
     # formula types with their scores
     print("Calculating score...")
     affinity, power = Counter(selected_hand).most_common(1)[0]
-    print(f"Your spell will have the {affinity} affinity and {power} multiplier")
+    for value in spell_hierarchy:
+        power_str = str(power)
+        if power_str == value: 
+            name = spell_hierarchy[f"{power_str}"]
+            spell = spell_list[f"{name}"]
+            break
+    affinity_power = affinity_list[f"{affinity}"] * power
+    spell_score = affinity_power * spell
+    print(f"You cast {affinity} {name} for {spell_score} damage!")
     # calculator that takes formulas and the input of the character 
-    return
+    return spell_score
 
 
 def inventory():
@@ -57,6 +73,7 @@ def inventory():
 
 
 def game():
+    returned_library = spell_library()
     player_hand = inventory()
     print(player_hand)
     selected_hand = []
@@ -83,7 +100,7 @@ def game():
         while hand_confirmation == True:
             confirmation = input(f"Play {selected_hand}?(Y/N): ")
             if confirmation == "Y" or confirmation == "y":
-                return score_calculator(selected_hand)
+                return score_calculator(selected_hand, returned_library)
             elif confirmation == "N" or confirmation == "n":
                 print("Canceled")
                 selected_hand = []
