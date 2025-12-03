@@ -53,6 +53,7 @@ def score_calculator(selected_hand, returned_library):
 
 
 def inventory():
+    # TODO: reformat affinity_inventory to draw from affinity_list to allow alterations in the future
     affinity_inventory = ["fire", "fire", "fire", "fire", "fire", "fire", "fire", "lightning", "lightning", "lightning", "lightning", "lightning", "lightning", 
                        "lightning", "holy", "holy", "holy", "holy", "holy", "holy", "holy", "mystic", "mystic", "mystic", "mystic", "mystic", "mystic", "mystic", ]
     hand_counter = 0
