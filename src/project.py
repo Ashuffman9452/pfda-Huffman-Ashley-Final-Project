@@ -9,13 +9,14 @@ def spell_library():
                      "lightning": 10,
                      "holy": 10,
                      "mystic": 10,
+                     "frenzy": 10,
                      "affinity_list": ["fire", "lightning", "holy", "mystic"]}
 
     # spell / multiplier
     spell_list = {"bolt": 1,
                   "whip": 2,
                   "ball": 3,
-                  "burst": 4,
+                  "burst": 3.5,
                   "placeholder": 4,
                   "comet": 5}
     returned_library = (affinity_list, spell_list)
@@ -33,9 +34,11 @@ def score_calculator(selected_hand, returned_library):
     # TODO: adda special case where, if one of each affinity is selected, then frenzy burst is cast
     print("Calculating score...")
     affinity, power = Counter(selected_hand).most_common(1)[0]
-    if selected_hand == ["fire", "mystic", "lightning", "holy"]:
+    frenzy_keys = ["fire", "lightning", "mystic", "holy"]
+    if all(key in selected_hand for key in frenzy_keys):
         spell = spell_list["burst"]
-        name = "frenzy"
+        affinity = "frenzy"
+        name = "burst"
     else:
         for value in spell_hierarchy:
             power_str = str(power)
