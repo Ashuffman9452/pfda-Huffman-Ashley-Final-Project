@@ -33,12 +33,16 @@ def score_calculator(selected_hand, returned_library):
     # TODO: adda special case where, if one of each affinity is selected, then frenzy burst is cast
     print("Calculating score...")
     affinity, power = Counter(selected_hand).most_common(1)[0]
-    for value in spell_hierarchy:
-        power_str = str(power)
-        if power_str == value: 
-            name = spell_hierarchy[f"{power_str}"]
-            spell = spell_list[f"{name}"]
-            break
+    if selected_hand == ["fire", "mystic", "lightning", "holy"]:
+        spell = spell_list["burst"]
+        name = "frenzy"
+    else:
+        for value in spell_hierarchy:
+            power_str = str(power)
+            if power_str == value: 
+                name = spell_hierarchy[f"{power_str}"]
+                spell = spell_list[f"{name}"]
+                break
     affinity_power = affinity_list[f"{affinity}"] * power
     spell_score = affinity_power * spell
     print(f"You cast {affinity} {name} for {spell_score} damage!")
@@ -66,7 +70,7 @@ def game():
     selected_hand = []
 
     selection_process = True
-    # TODO: Add a hand selection limit, which only allows up to 5 affinities to be chosen
+    # TODO: Add a way to discard and redraw affinities
     while selection_process == True:
         affinity_selection = True
         hand_confirmation = True
@@ -74,10 +78,15 @@ def game():
             try:
                 selection = input("select up to 5 affinities by typing their index(1-7) seperated by spaces: ")
                 inputs = selection.split()
-                integer_selection = [int(item) for item in inputs]
-                affinity_selection = False
+                if len(inputs) > 5:
+                    print("You can only select up to 5 affinities!")
+                else:
+                    integer_selection = [int(item) for item in inputs]
+                    affinity_selection = False
             except ValueError:
-                print("Invalid input, try again")
+                print("Invalid input, try again.")
+            except IndexError:
+                print("Invalid input, try again.")
 
         for number in integer_selection:
             int_number = number - 1
@@ -112,7 +121,7 @@ def main():
             else:
                 print("Please provide a valid input.")
     if running == False:
-        print("Thank you for playing")
+        print("Thank you for playing!")
     
 
 if __name__ == "__main__":
