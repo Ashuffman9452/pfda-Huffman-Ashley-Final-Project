@@ -17,7 +17,7 @@ def spell_library():
                   "whip": 2,
                   "ball": 3,
                   "burst": 3,
-                  "placeholder": 4,
+                  "reap": 4,
                   "comet": 5}
     returned_library = (affinity_list, spell_list)
     return returned_library
@@ -28,10 +28,10 @@ def score_calculator(selected_hand, returned_library):
     spell_hierarchy = {"1": "bolt",
                        "2": "whip", 
                        "3": "ball", 
-                       "4": "placeholder", 
+                       "4": "reap", 
                        "5": "comet"}
 
-    # TODO: adda special case where, if one of each affinity is selected, then frenzy burst is cast
+    # TODO: fix bug where playing spells with extra affinities further enhances damage untintentionally (could possibly make into an upgrade)
     print("Calculating score...")
     affinity, power = Counter(selected_hand).most_common(1)[0]
     frenzy_keys = ["fire", "lightning", "mystic", "holy"]
