@@ -63,15 +63,17 @@ def inventory():
         idx = random.randrange(len(affinity_inventory))
         hand.append(f"{affinity_inventory[idx]}")
         affinity_inventory.pop(idx)
-    return hand
+    hand_data = hand, hand_counter
+    return hand_data
 
 
 def game():
     # TODO: Decide wether or not to break game() into other custom functions
     returned_library = spell_library()
-    player_hand = inventory()
+    player_hand, hand_counter = inventory()
     print(player_hand)
     selected_hand = []
+    redraw_counter = 3
 
     selection_process = True
     # TODO: Add a way to discard and redraw affinities
@@ -80,10 +82,22 @@ def game():
         hand_confirmation = True
         while affinity_selection == True:
             try:
-                selection = input("select up to 5 affinities by typing their index(1-7) seperated by spaces: ")
+                selection = input(f"select up to 5 affinities by typing their index(1-7), or select up to {redraw_counter} starting with 'r' to redraw, seperated by spaces: ")
                 inputs = selection.split()
                 if len(inputs) > 5:
                     print("You can only select up to 5 affinities!")
+                elif inputs[0] == "r":
+                    if len(inputs) > {redraw_counter} + 1:
+                        print(f"You cannot redra more than {redraw_counter} affinities!")
+                    else:
+                        integer_selection = [int(item) for item in inputs]
+                        for number in integer_selection:
+                            int_number = number - 1
+                            redraw_hand = player_hand[int_number]
+                            selected_hand.pop(redraw_hand)
+                            hand_counter -= 1
+                        
+
                 else:
                     integer_selection = [int(item) for item in inputs]
                     affinity_selection = False
