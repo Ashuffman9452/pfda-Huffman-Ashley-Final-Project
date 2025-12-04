@@ -52,10 +52,9 @@ def score_calculator(selected_hand, returned_library):
     return spell_score
 
 
-def inventory():
-    # TODO: reformat affinity_inventory to draw from affinity_list to allow alterations in the future
-    affinity_inventory = ["fire", "fire", "fire", "fire", "fire", "fire", "fire", "lightning", "lightning", "lightning", "lightning", "lightning", "lightning", 
-                       "lightning", "holy", "holy", "holy", "holy", "holy", "holy", "holy", "mystic", "mystic", "mystic", "mystic", "mystic", "mystic", "mystic", ]
+def inventory(returned_library):
+    affinity_list, spell_list = returned_library
+    affinity_inventory = affinity_list["affinity_list"] * 7
     hand_counter = 0
     hand = []
     while hand_counter < 7:
@@ -70,7 +69,7 @@ def inventory():
 def game():
     # TODO: Decide wether or not to break game() into other custom functions
     returned_library = spell_library()
-    player_hand, hand_counter = inventory()
+    player_hand, hand_counter = inventory(returned_library)
     print(player_hand)
     selected_hand = []
     redraw_counter = 3
