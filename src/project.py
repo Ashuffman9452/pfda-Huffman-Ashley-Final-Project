@@ -55,31 +55,35 @@ def score_calculator(selected_hand, returned_library):
 def inventory(returned_library):
     affinity_list, spell_list = returned_library
     affinity_inventory = affinity_list["affinity_list"] * 7
-    hand_counter = 0
+    inventory_data = generate_hand(affinity_inventory), affinity_inventory
+    return inventory_data
+
+def generate_hand(hand, affinity_inventory):
     hand = []
+    hand_counter = 0
     while hand_counter < 7:
         hand_counter += 1
         idx = random.randrange(len(affinity_inventory))
         hand.append(f"{affinity_inventory[idx]}")
         affinity_inventory.pop(idx)
-    hand_data = hand, hand_counter
-    return hand_data
-
+        generated_hand = hand, hand_counter
+    return generated_hand
 
 def game():
     # TODO: Decide wether or not to break game() into other custom functions
     returned_library = spell_library()
-    player_hand, hand_counter = inventory(returned_library)
+    generated_player_hand, affinity_inventory = inventory(returned_library)
+    player_hand, hand_counter = generated_player_hand
     selected_hand = []
     redraw_counter = 3
-
     selection_process = True
     # TODO: Add a way to discard and redraw affinities
     while selection_process == True:
         affinity_selection = True
         hand_confirmation = True
-        while affinity_selection == True:
+        while affinity_selection == True:    
             try:
+                generate_hand(player_hand, hand_counter, affinity_inventory)
                 print(player_hand)
                 if redraw_counter > 0:
                     selection = input(f"Select up to 5 affinities by typing their index(1-7), or select up to {redraw_counter} starting with 'r' to redraw, seperated by spaces: ")
