@@ -98,11 +98,10 @@ def play_hand():
                         else:
                             integer_selection = [int(item) for item in inputs]
                             sorted_integer_selection = sorted(integer_selection, reverse=True)
-                            print(sorted_integer_selection)
                             for number in sorted_integer_selection:
                                 int_number = number - 1
-                                redraw_counter -= 1
                                 player_hand.pop(int_number)
+                                redraw_counter -= 1    
                             generate_hand(player_hand, affinity_inventory)
                     else:
                         integer_selection = [int(item) for item in inputs]
