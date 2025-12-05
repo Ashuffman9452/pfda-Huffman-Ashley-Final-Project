@@ -69,8 +69,8 @@ def generate_hand(hand, affinity_inventory):
         generated_hand = hand, hand_counter
     return generated_hand
 
-def game():
-    # TODO: Decide wether or not to break game() into other custom functions
+
+def play_hand():
     returned_library = spell_library()
     generated_player_hand, affinity_inventory = inventory(returned_library)
     player_hand, hand_counter = generated_player_hand
@@ -103,7 +103,6 @@ def game():
                             player_hand.pop(int_number)
                             hand_counter -= 1
                             redraw_counter -= 1
-                        
 
                 else:
                     integer_selection = [int(item) for item in inputs]
@@ -128,6 +127,11 @@ def game():
                 hand_confirmation = False
             else:
                 print("Please provide a valid input.")
+
+
+def game():
+    result = play_hand()
+    return result
 
 
 def main():
