@@ -75,7 +75,6 @@ def play_hand():
     selected_hand = []
     redraw_counter = 3
     selection_process = True
-    # TODO: Add a way to discard and redraw affinities
     while selection_process == True:
         hand_confirmation = True
         check_index_error = True
