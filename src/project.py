@@ -23,8 +23,8 @@ def spell_library():
     return returned_library
 
 
-def score_calculator(selected_hand, returned_library):
-    affinity_list, spell_list = returned_library
+def score_calculator(selected_hand):
+    affinity_list, spell_list = spell_library()
     spell_hierarchy = {"1": "bolt",
                        "2": "whip", 
                        "3": "ball", 
@@ -52,12 +52,13 @@ def score_calculator(selected_hand, returned_library):
     return spell_score
 
 
-def inventory(returned_library):
+def inventory():
     hand = []
-    affinity_list, spell_list = returned_library
+    affinity_list, spell_list = spell_library()
     affinity_inventory = affinity_list["affinity_list"] * 7
     inventory_data = generate_hand(hand, affinity_inventory), affinity_inventory
     return inventory_data
+
 
 def generate_hand(hand, affinity_inventory):
     while len(hand) < 7:
@@ -68,9 +69,15 @@ def generate_hand(hand, affinity_inventory):
     return generated_hand
 
 
+def round_manager():
+    round_counter = 1
+    while round_counter >= 1:
+        return round_counter
+
+
+
 def play_hand():
-    returned_library = spell_library()
-    generated_player_hand_data, affinity_inventory = inventory(returned_library)
+    generated_player_hand_data, affinity_inventory = inventory()
     player_hand = generated_player_hand_data
     selected_hand = []
     redraw_counter = 3
@@ -121,7 +128,7 @@ def play_hand():
         while hand_confirmation == True:
             confirmation = input(f"Play {selected_hand}?(Y/N): ")
             if confirmation == "Y" or confirmation == "y":
-                return score_calculator(selected_hand, returned_library)
+                return score_calculator(selected_hand)
             elif confirmation == "N" or confirmation == "n":
                 print("Canceled")
                 selected_hand = []
@@ -131,6 +138,8 @@ def play_hand():
 
 
 def game():
+    round = round_manager()
+    print(round)
     result = play_hand()
     return result
 
