@@ -53,14 +53,14 @@ def score_calculator(selected_hand, returned_library):
 
 
 def inventory(returned_library):
-    affinity_list, spell_list = returned_library
-    affinity_inventory = affinity_list["affinity_list"] * 7
-    inventory_data = generate_hand(affinity_inventory), affinity_inventory
-    return inventory_data
-
-def generate_hand(hand, affinity_inventory):
     hand = []
     hand_counter = 0
+    affinity_list, spell_list = returned_library
+    affinity_inventory = affinity_list["affinity_list"] * 7
+    inventory_data = generate_hand(hand, hand_counter, affinity_inventory), affinity_inventory
+    return inventory_data
+
+def generate_hand(hand, hand_counter, affinity_inventory):
     while hand_counter < 7:
         hand_counter += 1
         idx = random.randrange(len(affinity_inventory))
@@ -72,8 +72,7 @@ def generate_hand(hand, affinity_inventory):
 
 def play_hand():
     returned_library = spell_library()
-    generated_player_hand, affinity_inventory = inventory(returned_library)
-    player_hand, hand_counter = generated_player_hand
+    generated_player_hand_data, affinity_inventory = inventory(returned_library)
     selected_hand = []
     redraw_counter = 3
     selection_process = True
@@ -83,7 +82,7 @@ def play_hand():
         hand_confirmation = True
         while affinity_selection == True:    
             try:
-                generate_hand(player_hand, hand_counter, affinity_inventory)
+                player_hand, hand_counter = generated_player_hand_data
                 print(player_hand)
                 if redraw_counter > 0:
                     selection = input(f"Select up to 5 affinities by typing their index(1-7), or select up to {redraw_counter} starting with 'r' to redraw, seperated by spaces: ")
@@ -103,7 +102,7 @@ def play_hand():
                             player_hand.pop(int_number)
                             hand_counter -= 1
                             redraw_counter -= 1
-
+                        generate_hand(player_hand, hand_counter, affinity_inventory)
                 else:
                     integer_selection = [int(item) for item in inputs]
                     affinity_selection = False
