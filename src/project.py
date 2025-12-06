@@ -69,13 +69,20 @@ def generate_hand(hand, affinity_inventory):
     return generated_hand
 
 
+def floor_scaler():
+    return
+
+
+def enemy_manager():
+    return
+
+
 def round_manager():
     round_counter = 1
     while round_counter >= 1:
         return round_counter
 
-
-
+ 
 def play_hand():
     generated_player_hand_data, affinity_inventory = inventory()
     player_hand = generated_player_hand_data
