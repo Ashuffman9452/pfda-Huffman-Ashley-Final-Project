@@ -159,6 +159,7 @@ def play_hand():
                 check_index_error = False
             except IndexError:
                 print("Invalid input, try again.")
+                selected_hand = []
 
                
         while hand_confirmation == True:
