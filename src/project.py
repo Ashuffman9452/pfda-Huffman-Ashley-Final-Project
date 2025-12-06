@@ -70,17 +70,45 @@ def generate_hand(hand, affinity_inventory):
 
 
 def floor_scaler():
+
     return
 
 
 def enemy_manager():
-    return
+    enemy_hp = 150
+    return  enemy_hp
 
 
 def round_manager():
-    round_counter = 1
-    while round_counter >= 1:
-        return round_counter
+    ongoing_game = True
+    life = 4
+    highscore = 0
+    while ongoing_game == True:
+        required_score = enemy_manager()
+        while life > 0:
+            confirmation = True
+            print(f"Enemy HP: {required_score}!")
+            player_damage = play_hand()
+            required_score -= player_damage
+            highscore += player_damage
+            if required_score <= 0:
+                print("You have defeated the enemy!")
+                while confirmation == True:
+                    continue_confirmation = input("Dive deeper into the dungeon?(Y/N): ")
+                    if continue_confirmation == "n" or continue_confirmation == "N":
+                        print("You pack your things and leave while you're still alive...")
+                        return highscore
+                    elif continue_confirmation == "y" or continue_confirmation == "Y":
+                        life = 4
+                        print("You drink a health potion and decide to dive deeper into the dungeon...")
+                        confirmation = False
+                    else:
+                        print("Please provide a valid input.")
+            else:
+                life -= 1
+                print(f"You were attacked! {life} health remaning!")
+                if life <= 0:
+                    print("You ran out of HP! You collapse to the ground and become one with the many other corpses...")
 
  
 def play_hand():
@@ -131,10 +159,12 @@ def play_hand():
                 check_index_error = False
             except IndexError:
                 print("Invalid input, try again.")
+
                
         while hand_confirmation == True:
             confirmation = input(f"Play {selected_hand}?(Y/N): ")
             if confirmation == "Y" or confirmation == "y":
+                redraw_counter -= len(selected_hand)
                 return score_calculator(selected_hand)
             elif confirmation == "N" or confirmation == "n":
                 print("Canceled")
@@ -145,10 +175,10 @@ def play_hand():
 
 
 def game():
-    round = round_manager()
-    print(round)
-    result = play_hand()
-    return result
+    playing = True
+    while playing == True:
+        result = round_manager()
+        return result
 
 
 def main():
@@ -156,6 +186,7 @@ def main():
     while running == True:
         quit_confirmation = True
         result = game()
+        print(f"You delt {result} total damage this run!")
         while quit_confirmation == True:
             quit = input("Do you want to quit? Y/N: ")
             if quit == "Y" or quit == "y":
