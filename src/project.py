@@ -32,7 +32,6 @@ def score_calculator(selected_hand):
                        "5": "comet"}
 
     # TODO: fix bug where playing spells with extra affinities further enhances damage untintentionally (could possibly make into an upgrade)
-    print("Calculating score...")
     affinity, power = Counter(selected_hand).most_common(1)[0]
     frenzy_keys = ["fire", "lightning", "mystic", "holy"]
     if all(key in selected_hand for key in frenzy_keys):
@@ -74,8 +73,15 @@ def floor_scaler():
     return
 
 
-def enemy_manager():
-    enemy_hp = 150
+def enemy_manager(round):
+    if round == 1:
+        enemy_hp = 100
+    elif round == 2:
+        enemy_hp = 200
+    elif round == 3:
+        enemy_hp = 350
+    else:
+        enemy_hp = 200 + (75*round)*1.2
     return  enemy_hp
 
 
@@ -83,9 +89,11 @@ def round_manager():
     ongoing_game = True
     life = 4
     highscore = 0
+    round_counter = 1
     while ongoing_game == True:
+        print(f"Round {round_counter}!")
         play_round = True
-        required_score = enemy_manager()
+        required_score = enemy_manager(round_counter)
         while play_round == True:
             confirmation = True
             print(f"Enemy HP: {required_score}!")
@@ -102,6 +110,7 @@ def round_manager():
                         return highscore
                     elif continue_confirmation == "y" or continue_confirmation == "Y":
                         life = 4
+                        round_counter += 1
                         print("You drink a health potion and decide to dive deeper into the dungeon...")
                         confirmation = False
                         play_round = False
