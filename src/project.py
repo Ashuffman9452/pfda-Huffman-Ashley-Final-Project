@@ -82,7 +82,7 @@ def enemy_manager(round):
         enemy_hp = 350
     else:
         enemy_hp = 200 + (75*round)*1.2
-    return  enemy_hp
+    return enemy_hp
 
 
 def round_manager():
@@ -120,7 +120,7 @@ def round_manager():
                 life -= 1
                 print(f"You were attacked! {life} health remaning!")
                 if life <= 0:
-                    print("You ran out of HP! You collapse to the ground and become one with the many other corpses...")
+                    print("You collapse to the ground and become just another corpse to litter the dungeon...")
                     return highscore
 
  
