@@ -84,8 +84,9 @@ def round_manager():
     life = 4
     highscore = 0
     while ongoing_game == True:
+        play_round = True
         required_score = enemy_manager()
-        while life > 0:
+        while play_round == True:
             confirmation = True
             print(f"Enemy HP: {required_score}!")
             player_damage = play_hand()
@@ -97,11 +98,13 @@ def round_manager():
                     continue_confirmation = input("Dive deeper into the dungeon?(Y/N): ")
                     if continue_confirmation == "n" or continue_confirmation == "N":
                         print("You pack your things and leave while you're still alive...")
+                        play_round = False 
                         return highscore
                     elif continue_confirmation == "y" or continue_confirmation == "Y":
                         life = 4
                         print("You drink a health potion and decide to dive deeper into the dungeon...")
                         confirmation = False
+                        play_round = False
                     else:
                         print("Please provide a valid input.")
             else:
@@ -109,6 +112,7 @@ def round_manager():
                 print(f"You were attacked! {life} health remaning!")
                 if life <= 0:
                     print("You ran out of HP! You collapse to the ground and become one with the many other corpses...")
+                    return highscore
 
  
 def play_hand():
