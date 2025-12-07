@@ -74,6 +74,7 @@ def floor_scaler():
 
 
 def enemy_manager(round):
+    name_list = {}
     if round == 1:
         enemy_hp = 100
     elif round == 2:
@@ -101,26 +102,26 @@ def round_manager():
             required_score -= player_damage
             highscore += player_damage
             if required_score <= 0:
-                print("You have defeated the enemy!")
+                print("You have defeated the enemy!\n")
                 while confirmation == True:
                     continue_confirmation = input("Dive deeper into the dungeon?(Y/N): ")
                     if continue_confirmation == "n" or continue_confirmation == "N":
-                        print("You pack your things and leave while you're still alive...")
+                        print("You pack your things and leave while you're still alive...\n")
                         play_round = False 
                         return highscore
                     elif continue_confirmation == "y" or continue_confirmation == "Y":
                         life = 4
                         round_counter += 1
-                        print("You drink a health potion and decide to dive deeper into the dungeon...")
+                        print("You drink a health potion and decide to dive deeper into the dungeon...\n")
                         confirmation = False
                         play_round = False
                     else:
                         print("Please provide a valid input.")
             else:
                 life -= 1
-                print(f"You were attacked! {life} health remaning!")
+                print(f"You were attacked! {life} health remaning!\n")
                 if life <= 0:
-                    print("You collapse to the ground and become just another corpse to litter the dungeon...")
+                    print("You collapse to the ground and become just another corpse to litter the dungeon...\n")
                     return highscore
 
  
