@@ -68,19 +68,15 @@ def generate_hand(hand, affinity_inventory):
     return generated_hand
 
 
-def floor_scaler(round):
-    if round == 1:
-        enemy_hp = 50
-    elif round == 2:
-        enemy_hp = 100
-    elif round == 3:
-        enemy_hp = 150
-    elif round == 4:
-        enemy_hp = 200
-    elif round == 5:
+def floor_scaler(round_count, floor):
+    if round_count <= 5 and floor == 1:
+        enemy_hp = 50 + (50*round_count)
+    elif round_count == 5 and floor == 1:
         enemy_hp = 350
-    else:
-        enemy_hp = 200 + 75*round
+    elif round_count <= 5 and floor > 1:
+        enemy_hp = round(200 + (75*round_count)*1.(floor))
+    elif round_count == 5 and floor > 1:
+        enemy_hp = round(200 + (75*round_count)*1.(floor) + 150)
     return enemy_hp
 
 
@@ -94,8 +90,8 @@ def enemy_manager():
     name = f"{name_list[name_idx]}"
     race = f"{race_list[race_idx]}"
     modifier = f"{modifier_list[modifier_idx]}"
-    enemy_data = name, race, modifier
-    return enemy_data
+    enemy_name_data = name, race, modifier
+    return enemy_name_data
 
 
 def round_manager():
@@ -103,23 +99,28 @@ def round_manager():
     life = 5
     highscore = 0
     round_counter = 1
+    floor_counter = 1
     while ongoing_game == True:
             name, race, modifier = enemy_manager()
-            print(f"Round {round_counter}!")
+            print(f"Floor {floor_counter}, Round {round_counter}!")
             play_round = True
-            required_score = floor_scaler(round_counter)
+            required_score = floor_scaler(round_counter, floor_counter)
             while play_round == True:
                 confirmation = True
                 if round_counter < 5:
                     print(f"Enemy HP: {required_score}!")
                 elif round_counter == 5:
                     print(f"Floor Guardian {name}, the {race} {modifier} HP: {required_score}!")
+                elif round_counter == 1 and floor_counter == 10:
+                    required_score = 1073741824
+                    print (f"Floor Guardian Rick, Soldier of God HP: {required_score}!")
                 player_damage = play_hand()
                 required_score -= player_damage
                 highscore += player_damage
                 if required_score <= 0:
                     if round_counter < 5:
                         print("You have defeated the enemy!\n") 
+                        life += 1
                         round_counter += 1
                     elif round_counter == 5:
                         print("You have defeated the Floor Guardian!\n")            
@@ -132,6 +133,7 @@ def round_manager():
                             elif continue_confirmation == "y" or continue_confirmation == "Y":
                                 life = 5
                                 round_counter = 1
+                                floor += 1
                                 print("You drink a health potion and decide to dive deeper into the dungeon...\n")
                                 confirmation = False
                                 play_round = False
