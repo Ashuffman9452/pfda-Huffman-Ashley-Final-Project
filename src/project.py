@@ -74,9 +74,9 @@ def floor_scaler(round_count, floor):
     elif round_count == 5 and floor == 1:
         enemy_hp = 350
     elif round_count <= 5 and floor > 1:
-        enemy_hp = round(200 + (75*round_count)*1.(floor))
+        enemy_hp = round(100 * floor + (75*(round_count + floor))*1.(floor))
     elif round_count == 5 and floor > 1:
-        enemy_hp = round(200 + (75*round_count)*1.(floor) + 150)
+        enemy_hp = round(125 * floor + (75*(round_count + floor))*1.(floor) + 150)
     return enemy_hp
 
 
