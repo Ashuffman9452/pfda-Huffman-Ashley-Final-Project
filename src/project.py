@@ -84,7 +84,11 @@ def enemy_manager():
     name_list = ["Jimbo", "Libra", "Siouxsie", "Molina", "Dallon", "Snarf", "Ingward", "Eingyi", "Anastacia", "Andre", "Oswald", "Shiva", "Kaathe", "Azathoth"]
     race_list = ["Vampire", "Goblin", "Zombie", "Fae", "Elf", "Succubus", "Demon", "Angel", "Skeleton", "Kijetesantakalu", "Pikmin", "Comprehensibly Incomprehensible Ant"]
     modifier_list = ["Monarch", "Prophet", "Lich", "Scholar", "Paladin", "Warlock", "Cleric", "Statue", "that's slightly attractive", "Warrior"]
-
+    name = random.randrange(len(name_list))
+    race = random.randrange(len(race_list))
+    modifier = random.randrange(len(modifier_list))
+    enemy_data = name, race, modifier
+    return enemy_data
 
 
 def round_manager():
@@ -104,35 +108,21 @@ def round_manager():
                 required_score -= player_damage
                 highscore += player_damage
                 if required_score <= 0:
-                    print("You have defeated the enemy!\n")
-        elif round_counter == 5:
-
-            print(f"Round {round_counter}, beware of the floor guardian!")
-            play_round = True
-            required_score = floor_scaler(round_counter)
-            while play_round == True:
-                confirmation = True
-                print(f"Enemy HP: {required_score}!")
-                player_damage = play_hand()
-                required_score -= player_damage
-                highscore += player_damage
-                if required_score <= 0:
-                    print("You have defeated !\n")               
-                        while confirmation == True:
-                            continue_confirmation = input("Dive deeper into the dungeon?(Y/N): ")
-                            if continue_confirmation == "n" or continue_confirmation == "N":
-                                print("You pack your things and leave while you're still alive...\n")
-                                play_round = False 
-                                return highscore
-                            elif continue_confirmation == "y" or continue_confirmation == "Y":
-                                life = 5
-                                round_counter += 1
-                                print("You drink a health potion and decide to dive deeper into the dungeon...\n")
-                                confirmation = False
-                                play_round = False
-                            else:
-                                print("Please provide a valid input.")
-
+                    print("You have defeated the enemy!\n")             
+                    while confirmation == True:
+                        continue_confirmation = input("Dive deeper into the dungeon?(Y/N): ")
+                        if continue_confirmation == "n" or continue_confirmation == "N":
+                            print("You pack your things and leave while you're still alive...\n")
+                            play_round = False 
+                            return highscore
+                        elif continue_confirmation == "y" or continue_confirmation == "Y":
+                            life = 5
+                            round_counter += 1
+                            print("You drink a health potion and decide to dive deeper into the dungeon...\n")
+                            confirmation = False
+                            play_round = False
+                        else:
+                            print("Please provide a valid input.")
                 else:
                     life -= 1
                     print(f"You were attacked! {life} health remaning!\n")
