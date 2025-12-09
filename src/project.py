@@ -137,7 +137,8 @@ def round_manager():
 
                     if round_counter < 5:
                         print("You have defeated the enemy!\n") 
-                        life += 1
+                        if life < 5:
+                            life += 1
                         round_counter += 1
                     elif round_counter == 5:
                         print("You have defeated the Floor Guardian!\n")            
