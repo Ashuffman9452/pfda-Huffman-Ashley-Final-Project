@@ -2,6 +2,16 @@
 import random
 from collections import Counter
 
+class spell_counters:
+    def __init__(self):
+        self.bolt_counter = 0
+        self.whip_counter = 0
+        self.ball_counter = 0
+        self.burst_counter = 0
+        self.reap_counter = 0
+        self.comet_counter = 0
+        self.spell_counter = 0
+
 
 def spell_library():
     # affinity / score
@@ -31,7 +41,6 @@ def score_calculator(selected_hand):
                        "4": "reap", 
                        "5": "comet"}
 
-    # TODO: fix bug where playing spells with extra affinities further enhances damage untintentionally (could possibly make into an upgrade)
     affinity, power = Counter(selected_hand).most_common(1)[0]
     frenzy_keys = ["fire", "lightning", "mystic", "holy"]
     if all(key in selected_hand for key in frenzy_keys):
@@ -46,8 +55,10 @@ def score_calculator(selected_hand):
                 spell = spell_list[f"{name}"]
                 break
     affinity_power = affinity_list[f"{affinity}"] * power
-    spell_score = affinity_power * spell
+    spell_score = round(affinity_power * spell)
+
     print(f"You cast {affinity} {name} for {spell_score} damage!")
+    print(f"You become more proficient in casting {name}s\n")
     return spell_score
 
 
@@ -69,14 +80,14 @@ def generate_hand(hand, affinity_inventory):
 
 
 def floor_scaler(round_count, floor):
-    if round_count <= 5 and floor == 1:
-        enemy_hp = 50 + (50*round_count)
+    if round_count < 5 and floor == 1:
+        enemy_hp = 50 * round_count
     elif round_count == 5 and floor == 1:
         enemy_hp = 350
-    elif round_count <= 5 and floor > 1:
-        enemy_hp = round(100 * floor + (75*(round_count + floor))*1.(floor))
+    elif round_count < 5 and floor > 1:
+        enemy_hp = (100 * floor + (75*(round_count + floor)))
     elif round_count == 5 and floor > 1:
-        enemy_hp = round(125 * floor + (75*(round_count + floor))*1.(floor) + 150)
+        enemy_hp = (125 * floor + (75*(round_count + floor)) + 150)
     return enemy_hp
 
 
@@ -105,8 +116,10 @@ def round_manager():
             print(f"Floor {floor_counter}, Round {round_counter}!")
             play_round = True
             required_score = floor_scaler(round_counter, floor_counter)
+
             while play_round == True:
                 confirmation = True
+                
                 if round_counter < 5:
                     print(f"Enemy HP: {required_score}!")
                 elif round_counter == 5:
@@ -114,10 +127,12 @@ def round_manager():
                 elif round_counter == 1 and floor_counter == 10:
                     required_score = 1073741824
                     print (f"Floor Guardian Rick, Soldier of God HP: {required_score}!")
+
                 player_damage = play_hand()
                 required_score -= player_damage
                 highscore += player_damage
                 if required_score <= 0:
+
                     if round_counter < 5:
                         print("You have defeated the enemy!\n") 
                         life += 1
@@ -133,12 +148,13 @@ def round_manager():
                             elif continue_confirmation == "y" or continue_confirmation == "Y":
                                 life = 5
                                 round_counter = 1
-                                floor += 1
+                                floor_counter += 1
                                 print("You drink a health potion and decide to dive deeper into the dungeon...\n")
                                 confirmation = False
                                 play_round = False
                             else:
                                 print("Please provide a valid input.")
+
                     play_round = False
                 else:
                     life -= 1
