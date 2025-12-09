@@ -9,7 +9,7 @@ class Spell_Manager:
                               "lightning": 10,
                               "holy": 10,
                               "mystic": 10,
-                              "frenzy": 10,
+                              "frenzy": 25,
                               "affinity_list": ["fire", "lightning", "holy", "mystic"]}
         
         # spell / multiplier
@@ -20,9 +20,11 @@ class Spell_Manager:
                            "reap": 4,
                            "comet": 5}
         
-    def cast_spell(self, spell):
+    def cast_spell(self, spell, affinity):
         if spell in self.spell_list:
-            self.spell_list[spell] += 1
+            self.spell_list[spell] += .5
+        if affinity in self.affinity_list:
+            self.affinity_list[affinity] += 5
         
     def get_spell_libraries(self):
         spell_library_data = self.affinity_list, self.spell_list
@@ -54,10 +56,11 @@ def score_calculator(selected_hand):
     affinity_power = affinity_list[f"{affinity}"] * (power)
     spell_score = round(affinity_power * spell)
 
-    spell_manager.cast_spell(f"{name}")
+    spell_manager.cast_spell(name, affinity)
+
 
     print(f"You cast {affinity} {name} for {spell_score} damage!")
-    print(f"You become more proficient in casting {name}s\n")
+    print(f"You become more proficient in casting {name}s and {affinity} affinities!\n")
     return spell_score
 
 
