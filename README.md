@@ -1,6 +1,7 @@
 # pfda-Huffman-Ashley-Final-Project
 Repository for my final project.
-https://github.com/Ashuffman9452/pfda-Huffman-Ashley-Final-Project
+link to repository: https://github.com/Ashuffman9452/pfda-Huffman-Ashley-Final-Project
+Link to video: https://drive.google.com/file/d/1dkVcTtwnlnO-sFiXIAhMbfhwXGtZkLqz/view?usp=sharing
 
 # About Spellshock
 
