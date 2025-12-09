@@ -141,8 +141,8 @@ def round_manager():
                             print("Rick collapses to the ground, grasping his greatsword. He doesn't say a word, but nods to you in approval and allows you to pass.")
                             print("You walk past him, your body aching from your journey, and approach a well decorated stone door.")
                             print("Your hand touches the dark, cold, door and pushes it forward... a warm, dim light floods the room, gradually getting brighter.")
-                            Print("You walk into the light...\n")
-                            Print("And so you disappear, with your fate unknown...")
+                            print("You walk into the light...\n")
+                            print("And so you disappear, with your fate unknown...")
                             play_round = False
                             ongoing_game = False
                             return highscore
