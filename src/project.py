@@ -24,7 +24,7 @@ class Spell_Manager:
         if spell in self.spell_list:
             self.spell_list[spell] += .5
         if affinity in self.affinity_list:
-            self.affinity_list[affinity] += 5
+            self.affinity_list[affinity] += 2
         
     def get_spell_libraries(self):
         spell_library_data = self.affinity_list, self.spell_list
@@ -123,7 +123,7 @@ def round_manager():
                 confirmation = True
                 
                 if round_counter == 1 and floor_counter == 10:
-                    required_score = 1073741824
+                    required_score = 12082025
                     print (f"Floor Guardian Rick, Soldier of God HP: {required_score}!")
                 elif round_counter == 5:
                     print(f"Floor Guardian {name}, the {race} {modifier} HP: {required_score}!")
