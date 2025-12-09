@@ -137,12 +137,12 @@ def round_manager():
 
                     if round_counter < 5:
                         if round_counter == 5 and floor_counter == 10:
-                            print("\n")
+                            print("")
                             print("Rick collapses to the ground, grasping his greatsword. He doesn't say a word, but nods to you in approval and allows you to pass.")
                             print("You walk past him, your body aching from your journey, and approach a well decorated stone door.")
                             print("Your hand touches the dark, cold, door and pushes it forward... a warm, dim light floods the room, gradually getting brighter.")
                             print("You walk into the light...\n")
-                            print("And so you disappear, with your fate unknown...")
+                            print("And so you disappear, with your fate unknown...\n")
                             play_round = False
                             ongoing_game = False
                             return highscore
@@ -180,18 +180,18 @@ def round_manager():
                             while decision == True:
                                 choice = input("Do you take his hand?(Y/N): ")
                                 if choice == "y" or choice == "Y":
-                                    print("\n")
+                                    print("")
                                     print("You reach out and take his hand. The pain of your wounds no longer haunt you, and you stand up.")
                                     name = input("Rick asks for your name: ")
-                                    print("\n")
-                                    print("You've fought well, and valiantly, honing your spells and affinities, all of your choices have led up to this point.")
-                                    print(f"You are now- {name}, Spellshock of God")
+                                    print("")
+                                    print("You've fought well, and valiantly, honing your spells and affinities, all of your choices have led up to this point.\n")
+                                    print(f"You are now- {name}, Spellshock of God\n")
                                     return highscore
                                 elif choice == "n" or choice == "N":
-                                    print("\n")
+                                    print("")
                                     print("You deny his offer, your strength fades and so does the dungeon around you.")
                                     print("As you accept your own decision, Rick sits next to you, and you lie against the cold stone floor with a companion...\n")
-                                    print("And so you lie as a corpse, spelldrained and valiantly fought...")
+                                    print("And so you lie as a corpse, spelldrained and valiantly fought...\n")
                                     return highscore
                                 else:
                                     print("Please provide a valid input.")
