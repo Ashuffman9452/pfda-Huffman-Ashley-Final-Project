@@ -2,39 +2,36 @@
 import random
 from collections import Counter
 
-class spell_counters:
+class Spell_Manager:
     def __init__(self):
-        self.bolt_counter = 0
-        self.whip_counter = 0
-        self.ball_counter = 0
-        self.burst_counter = 0
-        self.reap_counter = 0
-        self.comet_counter = 0
-        self.spell_counter = 0
-
-
-def spell_library():
-    # affinity / score
-    affinity_list = {"fire": 10,
-                     "lightning": 10,
-                     "holy": 10,
-                     "mystic": 10,
-                     "frenzy": 10,
-                     "affinity_list": ["fire", "lightning", "holy", "mystic"]}
-
-    # spell / multiplier
-    spell_list = {"bolt": 1,
-                  "whip": 2,
-                  "ball": 3,
-                  "burst": 3,
-                  "reap": 4,
-                  "comet": 5}
-    returned_library = (affinity_list, spell_list)
-    return returned_library
+        # affinity / score
+        self.affinity_list = {"fire": 10,
+                              "lightning": 10,
+                              "holy": 10,
+                              "mystic": 10,
+                              "frenzy": 10,
+                              "affinity_list": ["fire", "lightning", "holy", "mystic"]}
+        
+        # spell / multiplier
+        self.spell_list = {"bolt": 1,
+                           "whip": 2,
+                           "ball": 3,
+                           "burst": 3,
+                           "reap": 4,
+                           "comet": 5}
+        
+    def cast_spell(self, spell):
+        if spell in self.spell_list:
+            self.spell_list[spell] += 1
+        
+    def get_spell_libraries(self):
+        spell_library_data = self.affinity_list, self.spell_list
+        return spell_library_data
 
 
 def score_calculator(selected_hand):
-    affinity_list, spell_list = spell_library()
+    affinity_list, spell_list = spell_manager.get_spell_libraries()
+
     spell_hierarchy = {"1": "bolt",
                        "2": "whip", 
                        "3": "ball", 
@@ -54,8 +51,10 @@ def score_calculator(selected_hand):
                 name = spell_hierarchy[f"{power_str}"]
                 spell = spell_list[f"{name}"]
                 break
-    affinity_power = affinity_list[f"{affinity}"] * power
+    affinity_power = affinity_list[f"{affinity}"] * (power)
     spell_score = round(affinity_power * spell)
+
+    spell_manager.cast_spell(f"{name}")
 
     print(f"You cast {affinity} {name} for {spell_score} damage!")
     print(f"You become more proficient in casting {name}s\n")
@@ -64,7 +63,7 @@ def score_calculator(selected_hand):
 
 def inventory():
     hand = []
-    affinity_list, spell_list = spell_library()
+    affinity_list, spell_list = spell_manager.get_spell_libraries()
     affinity_inventory = affinity_list["affinity_list"] * 7
     inventory_data = generate_hand(hand, affinity_inventory), affinity_inventory
     return inventory_data
@@ -120,13 +119,13 @@ def round_manager():
             while play_round == True:
                 confirmation = True
                 
-                if round_counter < 5:
-                    print(f"Enemy HP: {required_score}!")
-                elif round_counter == 5:
-                    print(f"Floor Guardian {name}, the {race} {modifier} HP: {required_score}!")
-                elif round_counter == 1 and floor_counter == 10:
+                if round_counter == 1 and floor_counter == 10:
                     required_score = 1073741824
                     print (f"Floor Guardian Rick, Soldier of God HP: {required_score}!")
+                elif round_counter == 5:
+                    print(f"Floor Guardian {name}, the {race} {modifier} HP: {required_score}!")
+                elif round_counter < 5:
+                    print(f"Enemy HP: {required_score}!")
 
                 player_damage = play_hand()
                 required_score -= player_damage
@@ -253,7 +252,8 @@ def main():
                 print("Please provide a valid input.")
     if running == False:
         print("Thank you for playing!")
-    
+
+spell_manager = Spell_Manager()   
 
 if __name__ == "__main__":
     main()
