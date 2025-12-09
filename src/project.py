@@ -228,6 +228,10 @@ def play_hand():
                             duplicates = []
                             integer_selection = [int(item) for item in inputs]
                             sorted_integer_selection = sorted(integer_selection, reverse=True)
+                            if sorted_integer_selection == []:
+                                hand_confirmation = False
+                                print("Invalid input, try again.")
+                                break
                             for number in sorted_integer_selection:
                                 if number not in duplicates:
                                     duplicates.append(number)
