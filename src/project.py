@@ -225,9 +225,16 @@ def play_hand():
                         if len(inputs) > redraw_counter:
                             print(f"You cannot redraw more than {redraw_counter} affinities!")
                         else:
+                            duplicates = []
                             integer_selection = [int(item) for item in inputs]
                             sorted_integer_selection = sorted(integer_selection, reverse=True)
                             for number in sorted_integer_selection:
+                                if number not in duplicates:
+                                    duplicates.append(number)
+                                else:
+                                    print("You cannot select an index more than once!")
+                                    hand_confirmation = False
+                                    break
                                 int_number = number - 1
                                 player_hand.pop(int_number)
                                 redraw_counter -= 1    
@@ -240,7 +247,14 @@ def play_hand():
                 except IndexError:
                     print("Invalid input, try again.")
             try:
+                duplicates = []
                 for number in integer_selection:
+                    if number not in duplicates:
+                        duplicates.append(number)
+                    else:
+                        print("You cannot select an index more than once!")
+                        hand_confirmation = False
+                        break
                     int_number = number - 1
                     selected_affinity = player_hand[int_number]
                     selected_hand.append(selected_affinity)
