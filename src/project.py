@@ -122,7 +122,7 @@ def round_manager():
             while play_round == True:
                 confirmation = True
                 
-                if round_counter == 1 and floor_counter == 10:
+                if round_counter == 5 and floor_counter == 10:
                     required_score = 12082025
                     print (f"Floor Guardian Rick, Soldier of God HP: {required_score}!")
                 elif round_counter == 5:
@@ -136,6 +136,16 @@ def round_manager():
                 if required_score <= 0:
 
                     if round_counter < 5:
+                        if round_counter == 5 and floor_counter == 10:
+                            print("\n")
+                            print("Rick collapses to the ground, grasping his greatsword. He doesn't say a word, but nods to you in approval and allows you to pass.")
+                            print("You walk past him, your body aching from your journey, and approach a well decorated stone door.")
+                            print("Your hand touches the dark, cold, door and pushes it forward... a warm, dim light floods the room, gradually getting brighter.")
+                            Print("You walk into the light...\n")
+                            Print("And so you disappear, with your fate unknown...")
+                            play_round = False
+                            ongoing_game = False
+                            return highscore
                         print("You have defeated the enemy!\n") 
                         if life < 5:
                             life += 1
@@ -163,6 +173,28 @@ def round_manager():
                     life -= 1
                     print(f"You were attacked! {life} health remaning!\n")
                     if life <= 0:
+                        if round_counter == 5 and floor_counter == 10:
+                            decision = True
+                            print("You collapse and grasp your chest... your mind stops racing, and you accept your fate, like a prey animal that knows it's time to stop running...")
+                            print("You await your execution from the final Floor Guardian- Rick, Soldier of God... but only a hand stretches out.")
+                            while decision == True:
+                                choice = input("Do you take his hand?(Y/N): ")
+                                if choice == "y" or choice == "Y":
+                                    print("\n")
+                                    print("You reach out and take his hand. The pain of your wounds no longer haunt you, and you stand up.")
+                                    name = input("Rick asks for your name: ")
+                                    print("\n")
+                                    print("You've fought well, and valiantly, honing your spells and affinities, all of your choices have led up to this point.")
+                                    print(f"You are now- {name}, Spellshock of God")
+                                    return highscore
+                                elif choice == "n" or choice == "N":
+                                    print("\n")
+                                    print("You deny his offer, your strength fades and so does the dungeon around you.")
+                                    print("As you accept your own decision, Rick sits next to you, and you lie against the cold stone floor with a companion...\n")
+                                    print("And so you lie as a corpse, spelldrained and valiantly fought...")
+                                    return highscore
+                                else:
+                                    print("Please provide a valid input.")
                         print("You collapse to the ground and become just another corpse to litter the dungeon...\n")
                         return highscore
 
@@ -255,7 +287,7 @@ def main():
             else:
                 print("Please provide a valid input.")
     if running == False:
-        print("Thank you for playing!")
+        print("Thank you for playing Spellshock!")
 
 spell_manager = Spell_Manager()   
 
